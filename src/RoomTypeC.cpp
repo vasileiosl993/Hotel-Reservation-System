@@ -28,7 +28,7 @@ void RoomTypeC::setMinDays(int d) {
 bool RoomTypeC::addReservation(Reservation& reserved) {
 	bool state = true;
 	if (reserved.getArrival() + reserved.getDays() > 29) { return false; }
-	for (int i = reserved.getArrival(); i < (reserved.getArrival() + reserved.getDays()); i++) {	//Elegxos an to dwmatio einai diathesimo kai xwrane ta atoma
+	for (int i = reserved.getArrival(); i < (reserved.getArrival() + reserved.getDays()); i++) {	//Check availability and capacity of the room
 		if (availability_[i] != nullptr || reserved.getNumber() > getCapacity() || reserved.getDays() < min_days_ || reserved.getNumber() < min_people_) {
 			state = false;
 			break;
@@ -39,10 +39,10 @@ bool RoomTypeC::addReservation(Reservation& reserved) {
 			availability_[i] = &reserved;
 		}
 		reserved.setRoom(reserved.getRoom());
-		cout << "Egine krathsh" << endl;
+		cout << "Reservation was made " << endl;
 	}
 	else {
-		cout << "Den egine krathsh" << endl;
+		cout << "No reservation was made " << endl;
 	}
 	return state;
 }
