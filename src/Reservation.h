@@ -30,13 +30,13 @@ public:
 	void reserve(Room*);
 
 private:
-	string customer_;	//Onomatepwnumo pelath
+	string customer_;	//customer name
 	static int id_;
 	unsigned int res_id_;	//reservation id
-	int arrival_;	//afiksi
-	int days_;	//meres paramonis
-	int number_of_people_;	//arithmos atomwn
-	Room* room_;	//dwmatio
+	int arrival_;	//arrival
+	int days_;	//days of stay
+	int number_of_people_;	//number of people
+	Room* room_;	//room
 
 };
 #endif
