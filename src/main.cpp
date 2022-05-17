@@ -12,12 +12,12 @@
 #include <string>
 #include <time.h>
 
-#include "CharGenerator.h"	//Header gia tin cgener()
+#include "CharGenerator.h"	//Header for the cgener()
 
 
-#define maxpeople 5		//Megalutero dwmatio se capacity.
-#define maxdaysarr 30	//Megistos arithmos afiksis.
-#define maxdaysstay 29	//Megistos arithmos paramonis.
+#define maxpeople 5	//Larger room in capacity.
+#define maxdaysarr 30	//Μaximum arrival number.
+#define maxdaysstay 29	//Μaximum number of stay.
 
 using namespace std;
 
@@ -26,7 +26,7 @@ int main()
 {
 	//---Rooms---
 	
-	//1.			//Dhmiourgia dwmatiwn.
+	//1.			//Creating rooms.
 	Room Blue;
 	Blue.setCapacity(4);
 	Blue.setPrice(15.00);
@@ -95,7 +95,7 @@ int main()
 
 	//---Hotel---
 
-	Hotel Conte_Del_Mare;		//Prosthiki dwmatiwn sto ksenodoxeio.
+	Hotel Conte_Del_Mare;		//Αddition of rooms to the hotel.
 
 	Conte_Del_Mare.addRoom(&Blue);
 	Conte_Del_Mare.addRoom(&Green);
@@ -112,12 +112,12 @@ int main()
 
 	int j = 0;
 	srand(time(NULL));
-	int k;	//voithitikos gia tis epanalipseis
+	int k;	
 
 	do {
 		if (j == 0) {
 			string s1 = cgener(rand() % 12 + 3);
-			Reservation* res_pointer = new Reservation();	//Dhmiourgia krathshs me tuxaio onoma.
+			Reservation* res_pointer = new Reservation();	//Create a reservation with a random name.
 			res_pointer->setName(s1);
 			res_pointer->setNumber(rand() % maxpeople + 1);
 			res_pointer->setArrival(rand() % maxdaysarr);
@@ -131,52 +131,52 @@ int main()
 		}
 
 		cout << endl;
-		cout << "Ti thelete na kanete: " << endl << endl;
-		cout << "1. Epomeni epanalipsi" << endl
-			 << "2. Prosthiki krathshs" << endl
-			 << "3. Akurwsh krathshs" << endl
-			 << "4. Provolh krathsewn" << endl
-			 << "5. Provolh dwmatiwn" << endl
-			 << "6. Provolh planou krathsewn" << endl
-			 << "7. Provolh esodwn" << endl
-			 << "8. Termatismos" << endl << endl;
+		cout << "What do you want to do: " << endl << endl;
+		cout << "1. Next Iteration" << endl
+			 << "2. Add Reservation" << endl
+			 << "3. Cancel Reservation" << endl
+			 << "4. Show Reservations" << endl
+			 << "5. Show Rooms" << endl
+			 << "6. Βooking Plan View" << endl
+			 << "7. Revenue Projection" << endl
+			 << "8. Exit" << endl << endl;
 
-		Reservation* input = new Reservation;	//Dhmiourgia reservation* gia input
+		Reservation* input = new Reservation;	
 		cin >> j;	//input options
 		cout << endl;
-		string s;	//input name
-		int a;	//input arrival
-		int d;	//input number of days
-		int p;	//input number of people
-		char ch;	//input check for random reservation
-		int i;	//input id
+		string s; //input name
+		int a;	  //input arrival
+		int d;	  //input number of days
+		int p;	  //input number of people
+		char ch;  //input check for random reservation
+		int i;	  //input id
 
 		switch (j) {
 		case 1:
 			j = 0;
 			break;
 		case 2:
-			cout << "Dwse to onoma ths krathshs: " << endl;
+			cout << "Reservation name: " << endl;
 			cin >> s;
-			cout << "Dwse tin hmera afikshs:" << endl;
+			cout << "Day of arrival: " << endl;
 			cin >> a;
-			a -= 1;	//gia na tairiazei ston availability
-			cout << "Dwse tis hmeres diamonhs:" << endl;
+			a -= 1;	 //to match availability
+			cout << "Days of stay: " << endl;
 			cin >> d;
-			cout << "Dwse ton arithmo twn atomwn:" << endl;
+			cout << "Number of people: " << endl;
 			cin >> p;
 
-			//Dhmiourgia krathshs me inputs
+			//Create reservation with
 			input->setName(s);
 			input->setArrival(a);
 			input->setDays(d);
 			input->setNumber(p);
 
-			cout << "Theleis na kaneis krathsh se sugkekrimeno dwmatio? (y/n)" << endl;
+			cout << "Do you want to book a specific room? (y/n)" << endl;
 			cin >> ch;
 
 			if (ch == 'y') {
-				cout << "Dwse to id tou dwmatiou:" << endl;
+				cout << "Give the id of the room:" << endl;
 				cin >> i;
 				Conte_Del_Mare.addReservationToRoom(input, i);
 			}
@@ -186,18 +186,18 @@ int main()
 
 			break;
 		case 3:
-			cout << "Dwse to id ths krathshs:" << endl;
+			cout << "Give the id of the arrival:" << endl;
 			cin >> i;
 			Conte_Del_Mare.HotelCancel(i);
 			break;
 		case 4:
-			cout << setw(16) << left << "Kwdikos Krathshs" << "| " << setw(15) << left << "Onoma Pelath" << "| " << setw(4) << left << "ID" << endl;
+			cout << setw(16) << left << "Arrival ID" << "| " << setw(15) << left << "Customer Name" << "| " << setw(4) << left << "ID" << endl;
 			if (Conte_Del_Mare.sizeofbookings() >= 1) {
 				Conte_Del_Mare.printResInfo();
 			}
 			break;
 		case 5:
-			cout << setw(16) << left << "Kwdikos Dwmatiou" << "| " << setw(15) << left << "Plhrothta" << "| " << setw(6) << left << "Esoda" << endl;
+			cout << setw(16) << left << "Room ID" << "| " << setw(15) << left << "Fullness" << "| " << setw(6) << left << "Income" << endl;
 			if (Conte_Del_Mare.sizeofrooms() >= 1) {
 				Conte_Del_Mare.printRoomInfo();
 			}
@@ -206,21 +206,21 @@ int main()
 			Conte_Del_Mare.reservationPlan();
 			break;
 		case 7:
-			cout << "Theleis na deis ta esoda sugkekrimenou dwmatiou? (y/n)" << endl;
+			cout << "Do you want to see the revenue of a specific room? (y/n)" << endl;
 			cin >> ch;
 			if(ch=='y'){
-				cout << "Dwse to id tou dwmatiou: " << endl;
+				cout << "Give the id of the room: " << endl;
 				cin >> i;
-				cout << "Ta esoda tou dwmatiou me id " << i << " einai: " << Conte_Del_Mare.IncomeCalculation(i) << endl;
+				cout << "Room revenue with id" << i << " is: " << Conte_Del_Mare.IncomeCalculation(i) << endl;
 			}
 			else {								
-				cout << "Ta esoda tou ksenodoxeiou apo ola ta dwmatia einai: " << Conte_Del_Mare.IncomeCalculation() << endl;
+				cout << "Τhe hotel revenue from all rooms is: " << Conte_Del_Mare.IncomeCalculation() << endl;
 			}
 			break;
 		case 8:
 			break;
 		default:
-			cout << "Dwse mia apo tis 8 epiloges." << endl;
+			cout << "Give one of the 8 options." << endl;
 		}
 
 	} while (j != 8);
