@@ -49,7 +49,7 @@ double Room::getPrice() {
 bool Room::addReservation(Reservation* reserved) {
 	bool state=true;
 	if (reserved->getArrival() + reserved->getDays() > 29) { return false; }
-	for (int i = reserved->getArrival(); i < (reserved->getArrival() + reserved->getDays()); i++) {	//Elegxos an to dwmatio einai diathesimo kai xwrane ta atoma
+	for (int i = reserved->getArrival(); i < (reserved->getArrival() + reserved->getDays()); i++) {	  //Check availability and capacity of the room
 		if (availability_[i] != nullptr || reserved->getNumber() > capacity_){
 			state = false;
 			break;
