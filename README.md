@@ -1,5 +1,5 @@
 # Hotel-Reservation-System
-Development of an integrated hotel's room reservation system,such as available booking dates and rooms, discount depending on the period and days of booking, etc.
+Development of an integrated hotel's room reservation system, which manages available booking dates and rooms (according to the tourist season, amount of booking days etc.)
 
 The project consists of .cpp and .h files for classes: Hotel, Room, Reservation, RoomTypeA, RoomTypeB, RoomTypeC, RoomTypeD, RoomTypeE in which various functions have been implemented. 
 
