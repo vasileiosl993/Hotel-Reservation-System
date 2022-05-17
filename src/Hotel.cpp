@@ -19,7 +19,7 @@ Hotel::~Hotel()
 {
 }
 
-//Voithitikes functions
+//auxiliary functions
 int Hotel::sizeofbookings() {
 	return bookings_.size();
 }
@@ -34,7 +34,7 @@ void Hotel::randomResCancel() {
 	
 	if (res.size() >= 1) {
 		advance(it, rand() % res.size());
-		cout << "Me thn tuxaia pithanothta, ";
+		cout << "By chance, ";
 		HotelCancel((*it)->getID());
 	}
 
@@ -83,12 +83,12 @@ Reservation* Hotel::retrieveReservationByID(int id) {
 }
 
 bool Hotel::addReservationToRoom(Reservation* res, int id){
-	if (retrieveRoomByID(id) && retrieveRoomByID(id)->addReservation(res)) {	//Prepei na ginetai elegxos an to retrieveRoomByID() epistrefei object kai oxi nullptr!
+	if (retrieveRoomByID(id) && retrieveRoomByID(id)->addReservation(res)) {	//It must be checked if the retrieveRoomByID() returns object and not nullptr!
 		bookings_.push_back(res);
-		cout << "Egine h krathsh sto dwmatio me id: " << id << endl;
+		cout << "The reservation was made in the room with id number: " << id << endl;
 		return true;
 	}
-	cout << "Den egine h krathsh! " << endl;
+	cout << "No reservation was made! " << endl;
 	return false;
 }
 
@@ -98,12 +98,12 @@ int Hotel::HotelAddReservation(Reservation* res){
 	for (it = rooms_.begin(); it != rooms_.end(); ++it) 
 	{
 		if ((*it)->addReservation(res)) {
-			cout << "Egine h krathsh sto dwmatio me id: " << (*it)->getID() << endl;
+			cout << "The reservation was made in the room with id number: " << (*it)->getID() << endl;
 			bookings_.push_back(res);
 			return (*it)->getID();;
 		}
 	}
-	cout << "Den egine h krathsh "<< endl;
+	cout << "No reservation was made! "<< endl;
 	return 0;
 }
 
@@ -115,18 +115,18 @@ bool Hotel::HotelCancel(int id) {
 		if ((*it) == retrieveReservationByID(id)) {
 			(*it)->getRoom()->cancel(id);
 			bookings_.erase(it);
-			cout << "Egine h akurwsh! " << endl;
+			cout << "Cancellation confirmed! " << endl;
 			return true;
 		}
-		cout << "Den egine h akurwsh! " << endl;
+		cout << "Τhe cancellation was not confirmed! " << endl;
 		return false;
 	}
 }
 
-void Hotel::reservationPlan() {		//Ektupwsh planou
+void Hotel::reservationPlan() {		//plan printing
 	list<Room*>::iterator it;
 
-	cout << setw(8) << "DWMATIO ";
+	cout << setw(8) << "ROOM ";
 	for (int i = 1; i < 31; i++) {
 		cout << setw(3) << left << i ;
 	}
@@ -148,7 +148,7 @@ void Hotel::reservationPlan() {		//Ektupwsh planou
 //Function Overload
 double Hotel::IncomeCalculation(int id) {
 	double result = 0.0;
-	if (retrieveRoomByID(id)) {		//Prepei na ginetai elegxos an to retrieveRoomByID() epistrefei object kai oxi nullptr!
+	if (retrieveRoomByID(id)) {		//It must be checked if the retrieveRoomByID() returns object and not nullptr!
 		result = retrieveRoomByID(id)->billing();
 		return result;
 	}
