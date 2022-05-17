@@ -15,7 +15,7 @@ public:
 	Hotel();
 	~Hotel();
 
-	//Voithitikes functions
+	//auxiliary functions
 	int sizeofbookings();
 	int sizeofrooms();
 	void randomResCancel();
